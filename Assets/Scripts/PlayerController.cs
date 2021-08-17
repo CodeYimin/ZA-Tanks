@@ -8,23 +8,27 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
+
+    Rigidbody2D myRigidBody;
+    Vector2 moveVelocity;
+
+    void Start()
+    {
+        myRigidBody = GetComponent<Rigidbody2D>();
+    }
     
     void Update()
     {
         float inputY = Input.GetAxisRaw("Vertical");
-        Vector2 moveVelocity = Vector2.up * (inputY * moveSpeed);
-        transform.Translate(moveVelocity * Time.deltaTime, Space.Self);
-
+        moveVelocity = Vector2.up * (inputY * moveSpeed);
+        
         float inputX = Input.GetAxisRaw("Horizontal");
-        Vector3 rotateVelocity = Vector3.back * (inputX * rotateSpeed);
-        transform.Rotate(rotateVelocity * Time.deltaTime);
+        float rotateVelocity = inputX * rotateSpeed;
+        transform.Rotate(Vector3.forward, -rotateVelocity * Time.deltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void FixedUpdate()
     {
-        if (other.CompareTag("Wall"))
-        {
-            
-        }
+        transform.Translate(moveVelocity * Time.fixedDeltaTime);
     }
 }
