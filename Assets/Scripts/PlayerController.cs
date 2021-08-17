@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     {
         float inputY = Input.GetAxisRaw("Vertical");
         float moveVelocity = inputY * moveSpeed;
+
+        if (inputY < 0) {
+            moveVelocity/=1.25f;
+        }
         Move(moveVelocity);
         
         float inputX = Input.GetAxisRaw("Horizontal");
