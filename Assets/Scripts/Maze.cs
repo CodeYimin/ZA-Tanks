@@ -33,8 +33,7 @@ public class Maze : MonoBehaviour
         
         //Array thing
        horizontalPaths = new bool [height,width-1];
-       verticalPaths = new bool [width,height-1];
-
+       verticalPaths = new bool [height-1, width];
        
        //Randomly puts true in arrays
        for (int i = 0; i < height; i++)  
@@ -50,47 +49,47 @@ public class Maze : MonoBehaviour
 
            }
        }
-
-       for (int i = 0; i < width; i++)  
+       for (int j = 0; j< height-1; j++)  
        {
-           for (int j = 0; j< height-1; j++)  
-           {
-               //vertical
+        for (int i = 0; i < width; i++)  
+            {
+                //vertical
                int random = Random.Range(0, 3);
                if (random > 1)
                {
-                   verticalPaths[i,j] = true;
+                   verticalPaths[j,i] = true;
                }
-           }
+            }
        }
-       
        
         
        Debug.Log("Vertical Paths");
        StringBuilder sb = new StringBuilder();
-       for(int i=0; i< width; i++)
+       for(int j=0; j<height-1; j++)
        {
-           for(int j=0; j<height-1; j++)
-           {
-               sb.Append(verticalPaths [i,j]);
+            for(int i=0; i< width; i++)
+            {
+           
+               sb.Append(verticalPaths [j,i]);
                sb.Append(' ');				   
-           }
-           sb.AppendLine();
+            }
+            sb.AppendLine();
        }
        Debug.Log(sb.ToString());
        
        Debug.Log("Horizontal Paths");
         sb = new StringBuilder();
-       for(int i=0; i< height; i++)
-       {
-           for(int j=0; j<width-1; j++)
-           {
+        for(int i=0; i< height; i++)
+        {
+            for(int j=0; j<width-1; j++)
+            {
+            
                sb.Append(horizontalPaths [i,j]);
                sb.Append(' ');				   
-           }
-           sb.AppendLine();
-       }
-       Debug.Log(sb.ToString());
+            }
+            sb.AppendLine();
+        }
+        Debug.Log(sb.ToString());
     
        
        Draw();
@@ -174,7 +173,7 @@ public class Maze : MonoBehaviour
             for (int j = 0; j < width; j++)
             {
 
-                if (!verticalPaths[j,i])
+                if (!verticalPaths[i,j])
                 {
                     size++;
                 }
@@ -182,7 +181,7 @@ public class Maze : MonoBehaviour
                 {
                     if (size != 0)
                     {
-                        GameObject mald = Instantiate(wall, new Vector2((-(last * wallLength) + offsetX - (j * wallLength) + offsetY) / 2.0f, ((i + 1) * wallLength) - offsetY) ,  Quaternion.identity, parent);
+                        GameObject mald = Instantiate(wall, new Vector2(((last * wallLength) - offsetX + (j * wallLength) - offsetX) / 2.0f, (-(i + 1) * wallLength) + offsetY) ,  Quaternion.identity, parent);
                         mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
                     }
 
@@ -194,8 +193,7 @@ public class Maze : MonoBehaviour
             
             if (size != 0)
             {
-
-                GameObject mald =Instantiate(wall, new Vector2( (-(last*wallLength))/2.0f,((i+1)*wallLength) - offsetY),  Quaternion.identity, parent);
+                GameObject mald =Instantiate(wall, new Vector2( ((last*wallLength))/2.0f,(-(i+1)*wallLength) + offsetY),  Quaternion.identity, parent);
                 mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
             }
             
