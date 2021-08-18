@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Maze : MonoBehaviour
 {
+
+    [SerializeField]
+    private int wallLength;
 
     [SerializeField]
     private int width;
@@ -12,24 +16,27 @@ public class Maze : MonoBehaviour
     private int height;
 
     [SerializeField]
-    private GameObject wallLength;
-    
-    [SerializeField]
-    private GameObject wallBlock;
-    
+    private GameObject wall;
+
     [SerializeField]
     private Transform parent;
 
-    bool [,] horizontalPaths ;
+    bool [,] horizontalPaths;
     bool [,] verticalPaths;
 
-    // Start is called before the first frame update
+    //How the maze works is like this:
+    //There are 2 2d Arrays that stores the wall that is in between 2 tiles
+    //If that element is true, it means that there is no wall between those 2 tiles
+    
     void Start()
     {
         
+        //Array thing
        horizontalPaths = new bool [height,width-1];
        verticalPaths = new bool [width,height-1];
 
+       
+       //Randomly puts true in arrays
        for (int i = 0; i < height; i++)  
        {
            for (int j = 0; j< width-1; j++)  
@@ -43,7 +50,7 @@ public class Maze : MonoBehaviour
 
            }
        }
-       
+
        for (int i = 0; i < width; i++)  
        {
            for (int j = 0; j< height-1; j++)  
@@ -56,6 +63,36 @@ public class Maze : MonoBehaviour
                }
            }
        }
+       
+       
+        
+       Debug.Log("Vertical Paths");
+       StringBuilder sb = new StringBuilder();
+       for(int i=0; i< width; i++)
+       {
+           for(int j=0; j<height-1; j++)
+           {
+               sb.Append(verticalPaths [i,j]);
+               sb.Append(' ');				   
+           }
+           sb.AppendLine();
+       }
+       Debug.Log(sb.ToString());
+       
+       Debug.Log("Horizontal Paths");
+        sb = new StringBuilder();
+       for(int i=0; i< height; i++)
+       {
+           for(int j=0; j<width-1; j++)
+           {
+               sb.Append(horizontalPaths [i,j]);
+               sb.Append(' ');				   
+           }
+           sb.AppendLine();
+       }
+       Debug.Log(sb.ToString());
+    
+       
        Draw();
 
     }
@@ -66,54 +103,103 @@ public class Maze : MonoBehaviour
         
     }
 
+    //Draws the maze
     void Draw()
     {
 
-        float offsetX = (width / 2 * 4 + 4);
-        float offsetY = (height / 2 * 4 + 2);
-        var horizontalAngle = wallLength.transform.rotation * Quaternion.Euler(0f, 180f, 0f);
+        // Width of Maze divided by 2 
+        float offsetX = (width * wallLength /2.0f);
+        
+        // Height of Maze divided by 2
+        float offsetY = (height * wallLength / 2.0f);
+        
+        //Angle of wall rotated 90* (vertical)
+        var horizontalAngle = wall.transform.rotation * Quaternion.Euler(0f, 180f, 0f);
 
-        for (int i = 1; i <= width; i++) 
+        //Main Walls
+        GameObject thing =Instantiate(wall, new Vector2(0, offsetY), Quaternion.identity, parent);
+        thing.transform.localScale = new Vector2(wallLength *width + 0.25f, 0.25f);
+        thing =Instantiate(wall, new Vector2(0, -offsetY), Quaternion.identity, parent);
+        thing.transform.localScale = new Vector2(wallLength *width + 0.25f, 0.25f);
+        thing =Instantiate(wall, new Vector2(offsetX, 0), horizontalAngle, parent);
+        thing.transform.localScale = new Vector2(wallLength *height + 0.25f, 0.25f);
+        thing = Instantiate(wall, new Vector2(-offsetX, 0), horizontalAngle , parent);
+        thing.transform.localScale = new Vector2(wallLength *height + 0.25f, 0.25f);
+        
+        //Horizontal paths (vertical lines)
+        for (int i = 0; i < width-1; i++)
         {
+            int size = 0;
+
+            int last = 0;
             
-            Instantiate(wallLength, new Vector2((4*i)- offsetX, 0- offsetY), Quaternion.identity, parent);
-            Instantiate(wallLength, new Vector2((4*i)- offsetX, height*4-offsetY), Quaternion.identity, parent);
-        }
-        
-        for (int i = 1; i <= height; i++) 
-        {
-            Instantiate(wallLength, new Vector2(0-offsetY, (4*i)-offsetX), horizontalAngle, parent);
-            Instantiate(wallLength, new Vector2(width*4-offsetY, (4*i)-offsetX), horizontalAngle , parent);
-        }
-        
-        for (int i = 1; i <= height; i++)  
-        {
-            for (int j = 1; j<= width-1; j++)  
+            for (int j = 0; j < height; j++)
             {
-                if (horizontalPaths[i-1, j-1] != true)
+
+                if (!horizontalPaths[j,i])
                 {
-                    Instantiate(wallLength, new Vector2( 4 *j -(offsetY),    (-4 *i) + offsetX ),horizontalAngle, parent);
+                    size++;
                 }
+                else
+                {
+                    if (size != 0)
+                    {
+                        GameObject mald = Instantiate(wall, new Vector2(((i + 1) * wallLength) - offsetX, (-(last * wallLength) + offsetY - (j * wallLength) + offsetY) / 2.0f), horizontalAngle, parent);
+                        mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+                    }
+
+                    last = j+1;
+                    size = 0;
+                }
+
             }
+            
+            if (size != 0)
+            {
+
+                GameObject mald =Instantiate(wall, new Vector2(((i+1)*wallLength) - offsetX, (-(last*wallLength))/2.0f), horizontalAngle, parent);
+               mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+            }
+            
         }
 
-        for (int i = 1; i <= width; i++) 
+
+        //vertical paths (vertical lines)
+        for (int i = 0; i < height-1; i++)
         {
-            for (int j = 1; j<= height-1; j++)  
+            int size = 0;
+
+            int last = 0;
+            
+            for (int j = 0; j < width; j++)
             {
-                if (verticalPaths[i-1, j-1] != true)
+
+                if (!verticalPaths[j,i])
                 {
-                    Instantiate(wallLength, new Vector2(4 *i -((offsetX)), 4 *j -((offsetX))+2) , Quaternion.identity, parent);
+                    size++;
                 }
+                else
+                {
+                    if (size != 0)
+                    {
+                        GameObject mald = Instantiate(wall, new Vector2((-(last * wallLength) + offsetX - (j * wallLength) + offsetY) / 2.0f, ((i + 1) * wallLength) - offsetY) ,  Quaternion.identity, parent);
+                        mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+                    }
+
+                    last = j+1;
+                    size = 0;
+                }
+
             }
+            
+            if (size != 0)
+            {
+
+                GameObject mald =Instantiate(wall, new Vector2( (-(last*wallLength))/2.0f,((i+1)*wallLength) - offsetY),  Quaternion.identity, parent);
+                mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+            }
+            
         }
         
-        for (int i = 0; i <= height; i++)  
-        {
-            for (int j = 0; j<= width; j++)  
-            {
-                Instantiate(wallBlock, new Vector2((4*i)- offsetX + 2, 4*j -((offsetY))), Quaternion.identity, parent);
-            }
-        }
     }
 }
