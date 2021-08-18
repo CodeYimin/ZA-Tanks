@@ -34,64 +34,12 @@ public class Maze : MonoBehaviour
         //Array thing
        horizontalPaths = new bool [height,width-1];
        verticalPaths = new bool [height-1, width];
-       
-       //Randomly puts true in arrays
-       for (int i = 0; i < height; i++)  
-       {
-           for (int j = 0; j< width-1; j++)  
-           {
-                //horizontal
-                int random = Random.Range(0, 3);
-                if (random > 1)
-                {
-                    horizontalPaths[i,j] = true;
-                }
 
-           }
-       }
-       for (int j = 0; j< height-1; j++)  
-       {
-        for (int i = 0; i < width; i++)  
-            {
-                //vertical
-               int random = Random.Range(0, 3);
-               if (random > 1)
-               {
-                   verticalPaths[j,i] = true;
-               }
-            }
-       }
        
-        
-       Debug.Log("Vertical Paths");
-       StringBuilder sb = new StringBuilder();
-       for(int j=0; j<height-1; j++)
-       {
-            for(int i=0; i< width; i++)
-            {
-           
-               sb.Append(verticalPaths [j,i]);
-               sb.Append(' ');				   
-            }
-            sb.AppendLine();
-       }
-       Debug.Log(sb.ToString());
        
-       Debug.Log("Horizontal Paths");
-        sb = new StringBuilder();
-        for(int i=0; i< height; i++)
-        {
-            for(int j=0; j<width-1; j++)
-            {
-            
-               sb.Append(horizontalPaths [i,j]);
-               sb.Append(' ');				   
-            }
-            sb.AppendLine();
-        }
-        Debug.Log(sb.ToString());
-    
-       
+       Generate();
+       Randomly(0);
+       // printOutDebug();
        Draw();
 
     }
@@ -100,6 +48,172 @@ public class Maze : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    //Generate the Maze
+    void Generate()
+    {
+        
+        Stack <string> history = new Stack<string>();
+        bool [,] visited = new bool [height, width];
+        visited[0, 0] = true;
+        history.Push("0,0");
+        while (history.Count != 0)
+        {
+            
+            bool up = false;
+            bool down = false;
+            bool left = false;
+            bool right = false;
+
+            int counter = 0;
+            ArrayList  selection = new ArrayList();
+            
+            int xCurrent = int.Parse(history.Peek().Substring(0,history.Peek().IndexOf(',')));
+            int yCurrent = int.Parse(history.Peek().Substring(history.Peek().IndexOf(',')+1));
+
+            //left
+            if (xCurrent > 0  && visited[yCurrent, xCurrent-1] != true)
+            {
+                left = true;
+                selection.Add("left");
+                counter++;
+            } 
+            
+            //right
+            if (xCurrent < height-1 && visited[yCurrent, xCurrent+1] != true)
+            {
+                right = true;
+                selection.Add("right");
+                counter++;
+            }
+            
+            //up
+            if (yCurrent > 0 && visited[yCurrent -1, xCurrent] != true)
+            {
+                up = true;
+                selection.Add("up");
+                counter++;
+            } 
+            
+            //down
+            if (yCurrent < width-1 && visited[yCurrent +1, xCurrent] != true)
+            {
+                down = true;
+                selection.Add("down");
+                counter++;
+            }
+
+            if (up || down || left || right)
+            {
+                
+                int randomInt = Random.Range(0, counter);
+
+                if (selection[randomInt].Equals("up"))
+                {
+                    
+                    visited[yCurrent-1, xCurrent] = true;
+                    string tempString = xCurrent + "," + (yCurrent - 1);
+                    history.Push(tempString);
+                    verticalPaths[yCurrent-1, xCurrent] = true;
+                }
+                
+                if (selection[randomInt].Equals("down"))
+                {
+                    
+                    visited[yCurrent+1, xCurrent] = true;
+                    string tempString = xCurrent + "," + (yCurrent +1);
+                    history.Push(tempString);
+                    verticalPaths[yCurrent , xCurrent] = true;
+                }
+                
+                if (selection[randomInt].Equals("left"))
+                {
+                    visited[yCurrent, xCurrent-1] = true;
+                    string tempString = (xCurrent-1) + "," + yCurrent;
+                    history.Push(tempString);
+                    horizontalPaths[yCurrent , xCurrent -1] = true;
+                        
+                }
+                
+                if (selection[randomInt].Equals("right"))
+                {
+                    visited[yCurrent, xCurrent+1] = true;
+                    string tempString = (xCurrent+1) + "," + yCurrent;
+                    history.Push(tempString);
+                    horizontalPaths[yCurrent , xCurrent] = true;
+                }
+                
+            }
+            else
+            {
+                history.Pop();
+            }
+
+        }
+    }
+
+    //Randomly puts paths in the map
+    void Randomly(int percentage)
+    {
+        //Randomly puts true in arrays
+        for (int i = 0; i < height; i++)  
+        {
+            for (int j = 0; j< width-1; j++)  
+            {
+                //horizontal
+                int random = Random.Range(0, 101);
+                if (random < percentage)
+                {
+                    horizontalPaths[i,j] = true;
+                }
+
+            }
+        }
+        for (int j = 0; j< height-1; j++)  
+        {
+            for (int i = 0; i < width; i++)  
+            {
+                //vertical
+                int random = Random.Range(0, 101);
+                if (random < percentage)
+                {
+                    verticalPaths[j,i] = true;
+                }
+            }
+        }
+    }
+
+    //Prints out the 2d arrays
+    void printOutDebug()
+    {
+        Debug.Log("Vertical Paths");
+        StringBuilder sb = new StringBuilder();
+        for(int j=0; j<height-1; j++)
+        {
+            for(int i=0; i< width; i++)
+            {
+           
+                sb.Append(verticalPaths [j,i]);
+                sb.Append(' ');				   
+            }
+            sb.AppendLine();
+        }
+        Debug.Log(sb.ToString());
+       
+        Debug.Log("Horizontal Paths");
+        sb = new StringBuilder();
+        for(int i=0; i< height; i++)
+        {
+            for(int j=0; j<width-1; j++)
+            {
+            
+                sb.Append(horizontalPaths [i,j]);
+                sb.Append(' ');				   
+            }
+            sb.AppendLine();
+        }
+        Debug.Log(sb.ToString());
     }
 
     //Draws the maze

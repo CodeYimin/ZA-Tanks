@@ -265,9 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f780f1e121fe140b82f57b2f6624d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallLength: 3
-  width: 21
-  height: 21
+  wallLength: 4
+  width: 15
+  height: 15
   wall: {fileID: 311039416750473834, guid: a0c2c6a24c07c724fbd1ae5e84198dad, type: 3}
   parent: {fileID: 945254484}
 --- !u!4 &1511224504
@@ -379,5 +379,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6fad6c52d33054c8dac6df4ea99401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 6
   rotateSpeed: 180
