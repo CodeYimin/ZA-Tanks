@@ -38,7 +38,7 @@ public class Maze : MonoBehaviour
        
        
        Generate();
-       Randomly(0);
+       Randomly(10);
        // printOutDebug();
        Draw();
 
