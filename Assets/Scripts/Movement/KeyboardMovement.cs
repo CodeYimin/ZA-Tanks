@@ -9,11 +9,11 @@ namespace Movement
         [SerializeField] float moveSpeed = 5;
         [SerializeField] float backwardsMovingSlowdown = 0.5f;
         [SerializeField] float rotateSpeed = 180;
-        MovementController movementController;
+        MovementManager movementManager;
         
         void Start()
         {
-            movementController = GetComponent<MovementController>();
+            movementManager = GetComponent<MovementManager>();
         }
         
         void Update()
@@ -22,13 +22,14 @@ namespace Movement
             float inputY = Input.GetAxisRaw("Vertical");
             Vector2 direction = transform.up;
             Vector2 locationVelocity = direction * (inputY * moveSpeed);
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (inputY == -1) locationVelocity *= backwardsMovingSlowdown;
 
             // Horizontal rotation
             float inputX = Input.GetAxisRaw("Horizontal");
             float rotationVelocity = -inputX * rotateSpeed;
             
-            movementController.Move(locationVelocity, rotationVelocity);
+            movementManager.MoveAndRotate(locationVelocity, rotationVelocity);
         }
     }
 }

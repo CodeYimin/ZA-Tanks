@@ -1,19 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firing;
 using UnityEngine;
 
 public class SimpleFire : MonoBehaviour
 {
-
     [SerializeField] Transform muzzle;
     [SerializeField] Projectile projectile;
-    [SerializeField] float projectileVelocity;
+    [SerializeField] Vector2 projectileVelocity;
     [SerializeField] float projectileDuration;
+
+    FireManager fireManager;
     
-    void OnFire()
+    void Start()
     {
-        Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation);
-        Temporary temporary = newProjectile.gameObject.AddComponent<Temporary>();
-        temporary.setDuration(projectileDuration);
+        fireManager = GetComponent<FireManager>();
+        fireManager.OnFire += FireProjectile;
+    }
+    
+    void Update()
+    {
+
+    }
+    
+    void FireProjectile()
+    {
+        fireManager.SpawnProjectile(projectile, muzzle.position, muzzle.eulerAngles.z, projectileVelocity);
     }
 }

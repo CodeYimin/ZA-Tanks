@@ -236,7 +236,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5815000697607257026}
   - component: {fileID: 4329710140535231539}
+  - component: {fileID: -8573899618132662572}
   - component: {fileID: 1637246024896530260}
+  - component: {fileID: 1318549031997363019}
   m_Layer: 0
   m_Name: Basic Gun
   m_TagString: Untagged
@@ -272,6 +274,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d085fdc997a4946a38f2cb1c45a619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownSeconds: 0
+--- !u!114 &-8573899618132662572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070854669545461829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00aa1803594a44fcbfb865b817783f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preventSpawnCollide: []
 --- !u!114 &1637246024896530260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,5 +302,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 8506557951330540097}
   projectile: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
-  projectileVelocity: 10
+  projectileVelocity: {x: 0, y: 5}
   projectileDuration: 10
+--- !u!114 &1318549031997363019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070854669545461829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53e5e76841b342499aa488905caa20d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: Fire1

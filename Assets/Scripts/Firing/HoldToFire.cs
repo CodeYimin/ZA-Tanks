@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firing;
 using UnityEngine;
 
 public class HoldToFire : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] string button;
+
+    FireManager fireManager;
+    
     void Start()
     {
-        
+        fireManager = GetComponent<FireManager>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (Input.GetButton(button))
+        {
+            fireManager.Fire();
+        }
     }
 }
