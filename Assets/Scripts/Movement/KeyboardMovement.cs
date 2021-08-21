@@ -11,7 +11,7 @@ namespace Movement
         [SerializeField] float rotateSpeed = 180;
         MovementManager movementManager;
         
-        void Start()
+        void Awake()
         {
             movementManager = GetComponent<MovementManager>();
         }

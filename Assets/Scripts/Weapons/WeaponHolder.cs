@@ -25,12 +25,5 @@ public class WeaponHolder : MonoBehaviour
         equippedWeapon = Instantiate(weaponToEquip, transform.position, transform.rotation);
         equippedWeapon.transform.parent = transform;
     }
-
-    public void OnFire()
-    {
-        if (equippedWeapon != null)
-        {
-            equippedWeapon.Fire();
-        }
-    }
+    
 }

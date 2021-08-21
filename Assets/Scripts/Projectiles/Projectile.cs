@@ -6,23 +6,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float speed = 10;
-    [SerializeField] string[] collisionTags = new string[0]; 
+    [SerializeField] float speed;
     Rigidbody2D myRigidbody;
     
-    void Start()
+    void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myRigidbody.velocity = transform.up * speed;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    public void SetSpeed(float newSpeed)
     {
-        if (collisionTags.Contains(other.gameObject.tag))
-        {
-            ContactPoint2D hit = other.GetContact(0);
-            myRigidbody.velocity = Vector2.Reflect(myRigidbody.velocity, hit.normal); 
-        }
-
+        myRigidbody.velocity = transform.up * newSpeed;
     }
 }

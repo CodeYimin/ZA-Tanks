@@ -10,7 +10,7 @@ namespace Movement
 
         MovementManager movementManager;
 
-        void Start()
+        void Awake()
         {
             movementManager = GetComponent<MovementManager>();
             movementManager.OnMoveAndRotate += MoveAndRotate;
