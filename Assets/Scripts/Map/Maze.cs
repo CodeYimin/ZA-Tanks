@@ -185,7 +185,7 @@ public class Maze : MonoBehaviour
     }
 
     //Prints out the 2d arrays
-    void printOutDebug()
+    void PrintOutDebug()
     {
         Debug.Log("Vertical Paths");
         StringBuilder sb = new StringBuilder();

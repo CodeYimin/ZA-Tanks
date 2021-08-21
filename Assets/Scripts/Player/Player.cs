@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    HealthSystem myHealthSystem;
+    
     void Start()
     {
-        
+        myHealthSystem = GetComponent<HealthSystem>();
+        myHealthSystem.OnHealthChange += OnHealthChange;
     }
 
-    void OnDeath()
+    void OnHealthChange(float newHealth)
     {
-        Destroy(gameObject);
+        if (newHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

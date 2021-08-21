@@ -13,8 +13,27 @@ public class DestroyOnCollision : MonoBehaviour
         Both
     }
 
-    [SerializeField] string[] collisionTags = new string[0];
+    [SerializeField] string[] collisionTags;
     [SerializeField] Collider affectedCollider;
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collisionTags.Contains(collision.collider.tag))
+        {
+            switch (affectedCollider)
+            {
+                case Collider.Self:
+                    Destroy(collision.otherCollider.gameObject);
+                    break;
+                case Collider.Other:
+                    Destroy(collision.collider.gameObject);
+                    break;
+                case Collider.Both:
+                    Destroy(collision.otherCollider.gameObject);
+                    Destroy(collision.collider.gameObject);
+                    break;
+            }
+        }
+    }
 
 }

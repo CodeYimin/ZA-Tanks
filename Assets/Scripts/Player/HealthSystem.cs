@@ -3,20 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour, IDamageable
+public class HealthSystem : MonoBehaviour
 {
+    public event Action<float> OnHealthDamage;
+    public event Action<float> OnHealthChange;
+    
     [SerializeField] float health = 1;
-
-    void Update()
-    {
-        if (health <= 0)
-        {
-            SendMessage("OnDeath");
-        }
-    }
-
+    
     public void TakeDamage(float damage)
     {
         health -= damage;
+        OnHealthDamage?.Invoke(damage);
+        OnHealthChange?.Invoke(health);
     }
 }

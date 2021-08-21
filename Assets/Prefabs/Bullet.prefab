@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bf1a3dae879b14fbe99fe744580820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionTags: []
+  collisionTags:
+  - Player
   affectedCollider: 0
 --- !u!114 &3326322740047811350
 MonoBehaviour:
@@ -127,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82801e5ed69f325429711fee202b9839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionTags: []
-  damage: 0
-  affectedCollider: 0
+  collisionTags:
+  - Player
+  damage: 1
+  affectedCollider: 1
 --- !u!114 &1360289537207104677
 MonoBehaviour:
   m_ObjectHideFlags: 0
