@@ -64,10 +64,7 @@ public class Maze : MonoBehaviour
         while (history.Count != 0)
         {
             
-            bool up = false;
-            bool down = false;
-            bool left = false;
-            bool right = false;
+            bool possible = false;
 
             int counter = 0;
             ArrayList  selection = new ArrayList();
@@ -78,7 +75,7 @@ public class Maze : MonoBehaviour
             //left
             if (xCurrent > 0  && visited[yCurrent, xCurrent-1] != true)
             {
-                left = true;
+                possible = true;
                 selection.Add("left");
                 counter++;
             } 
@@ -86,7 +83,7 @@ public class Maze : MonoBehaviour
             //right
             if (xCurrent < height-1 && visited[yCurrent, xCurrent+1] != true)
             {
-                right = true;
+                possible = true;
                 selection.Add("right");
                 counter++;
             }
@@ -94,7 +91,7 @@ public class Maze : MonoBehaviour
             //up
             if (yCurrent > 0 && visited[yCurrent -1, xCurrent] != true)
             {
-                up = true;
+                possible = true;
                 selection.Add("up");
                 counter++;
             } 
@@ -102,12 +99,12 @@ public class Maze : MonoBehaviour
             //down
             if (yCurrent < width-1 && visited[yCurrent +1, xCurrent] != true)
             {
-                down = true;
+                possible = true;
                 selection.Add("down");
                 counter++;
             }
 
-            if (up || down || left || right)
+            if (possible)
             {
                 
                 int randomInt = Random.Range(0, counter);
@@ -245,7 +242,7 @@ public class Maze : MonoBehaviour
         //Horizontal paths (vertical lines)
         for (int i = 0; i < width-1; i++)
         {
-            int size = 0;
+            int consecutiveWalls = 0;
 
             int last = 0;
             
@@ -254,27 +251,27 @@ public class Maze : MonoBehaviour
 
                 if (!horizontalPaths[j,i])
                 {
-                    size++;
+                    consecutiveWalls++;
                 }
                 else
                 {
-                    if (size != 0)
+                    if (consecutiveWalls != 0)
                     {
                         GameObject mald = Instantiate(wall, new Vector2(((i + 1) * wallLength) - offsetX, (-(last * wallLength) + offsetY - (j * wallLength) + offsetY) / 2.0f), horizontalAngle, parent);
-                        mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+                        mald.transform.localScale = new Vector2(wallLength * consecutiveWalls + 0.25f, 0.25f);
                     }
 
                     last = j+1;
-                    size = 0;
+                    consecutiveWalls = 0;
                 }
 
             }
             
-            if (size != 0)
+            if (consecutiveWalls != 0)
             {
 
                 GameObject mald =Instantiate(wall, new Vector2(((i+1)*wallLength) - offsetX, (-(last*wallLength))/2.0f), horizontalAngle, parent);
-               mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+               mald.transform.localScale = new Vector2(wallLength * consecutiveWalls + 0.25f, 0.25f);
             }
             
         }
@@ -283,7 +280,7 @@ public class Maze : MonoBehaviour
         //vertical paths (vertical lines)
         for (int i = 0; i < height-1; i++)
         {
-            int size = 0;
+            int consecutiveWalls = 0;
 
             int last = 0;
             
@@ -292,26 +289,26 @@ public class Maze : MonoBehaviour
 
                 if (!verticalPaths[i,j])
                 {
-                    size++;
+                    consecutiveWalls++;
                 }
                 else
                 {
-                    if (size != 0)
+                    if (consecutiveWalls != 0)
                     {
                         GameObject mald = Instantiate(wall, new Vector2(((last * wallLength) - offsetX + (j * wallLength) - offsetX) / 2.0f, (-(i + 1) * wallLength) + offsetY) ,  Quaternion.identity, parent);
-                        mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+                        mald.transform.localScale = new Vector2(wallLength * consecutiveWalls + 0.25f, 0.25f);
                     }
 
                     last = j+1;
-                    size = 0;
+                    consecutiveWalls = 0;
                 }
 
             }
             
-            if (size != 0)
+            if (consecutiveWalls != 0)
             {
                 GameObject mald =Instantiate(wall, new Vector2( ((last*wallLength))/2.0f,(-(i+1)*wallLength) + offsetY),  Quaternion.identity, parent);
-                mald.transform.localScale = new Vector2(wallLength * size + 0.25f, 0.25f);
+                mald.transform.localScale = new Vector2(wallLength * consecutiveWalls + 0.25f, 0.25f);
             }
             
         }
