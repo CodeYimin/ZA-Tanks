@@ -27,6 +27,7 @@ public class Maze : MonoBehaviour
     bool [,] horizontalPaths;
     bool [,] verticalPaths;
 
+
     //How the maze works is like this:
     //There are 2 2d Arrays that stores the wall that is in between 2 tiles
     //If that element is true, it means that there is no wall between those 2 tiles
