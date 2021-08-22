@@ -21,6 +21,9 @@ public class Maze : MonoBehaviour
     [SerializeField]
     private Transform parent;
 
+    [SerializeField]
+    private int randomPercentage;
+
     bool [,] horizontalPaths;
     bool [,] verticalPaths;
 
@@ -38,7 +41,7 @@ public class Maze : MonoBehaviour
        
        
        Generate();
-       Randomly(10);
+       Randomly(randomPercentage);
        // printOutDebug();
        Draw();
 
