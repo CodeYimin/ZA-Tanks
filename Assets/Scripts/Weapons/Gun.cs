@@ -5,12 +5,12 @@ namespace Weapons
 {
     public class Gun : MonoBehaviour
     {
-        [SerializeField] Projectile projectile;
-        [SerializeField] Transform muzzle;
-        [SerializeField] float projectileSpeed = 5;
-        [SerializeField] float projectileDuration = 5;
+        [SerializeField] private Projectile projectile;
+        [SerializeField] private Transform muzzle;
+        [SerializeField] private float projectileSpeed = 5;
+        [SerializeField] private float projectileDuration = 5;
 
-        Weapon weapon;
+        private Weapon weapon;
         
         void Start()
         {

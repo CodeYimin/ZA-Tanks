@@ -7,6 +7,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float speed;
+    
     Rigidbody2D myRigidbody;
     
     void Awake()
