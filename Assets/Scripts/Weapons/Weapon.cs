@@ -37,10 +37,10 @@ public class Weapon : MonoBehaviour
         switch (fireMode)
         {
             case FireMode.TapToFire:
-                if (Input.GetButtonDown(fireButton)) OnFire?.Invoke();
+                // if (Input.GetButtonDown(fireButton)) OnFire?.Invoke();
                 break;
             case FireMode.HoldToFire:
-                if (Input.GetButton(fireButton)) OnFire?.Invoke();
+                // if (Input.GetButton(fireButton)) OnFire?.Invoke();
                 break;
         }
     }
