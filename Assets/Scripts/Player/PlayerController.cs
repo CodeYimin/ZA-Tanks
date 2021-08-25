@@ -10,34 +10,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotateSpeed;
     [SerializeField] string[] collisionTags = new string[0];
 
-    private void Start()
-    {
-        print("mal");
-    }
+    private Vector2 movementInput = Vector2.zero;
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        print("helo");
-        // Vector2 movementInput = context.ReadValue<Vector2>();
-        //
-        // // Vertical movement
-        // float inputY = movementInput.y;
-        // Vector2 direction = transform.up;
-        // Vector2 moveVelocity = direction * (inputY * moveSpeed);
-        // // ReSharper disable once CompareOfFloatsByEqualityOperator
-        // if (inputY == -1)
-        // {
-        //     moveVelocity *= backwardsMoveSlowdown;
-        // }
-        //
-        // // Horizontal rotation
-        // float inputX = movementInput.x;
-        // float angularVelocity = -inputX * rotateSpeed;
-        //     
-        // MoveAndRotate(moveVelocity, angularVelocity);
+        movementInput = context.ReadValue<Vector2>();
     }
 
-    void MoveAndRotate(Vector3 moveVelocity, float angularVelocity)
+    private void Update()
+    {
+        // Vertical movement
+        float inputY = movementInput.y;
+        Vector2 direction = transform.up;
+        Vector2 moveVelocity = direction * (inputY * moveSpeed);
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
+        if (inputY == -1)
+        {
+            moveVelocity *= backwardsMoveSlowdown;
+        }
+        
+        // Horizontal rotation
+        float inputX = movementInput.x;
+        float angularVelocity = -inputX * rotateSpeed;
+            
+        MoveAndRotate(moveVelocity, angularVelocity);
+    }
+
+    private void MoveAndRotate(Vector3 moveVelocity, float angularVelocity)
     {
         Vector3 newPosition = transform.position + moveVelocity * Time.deltaTime;
         float newRotation = transform.eulerAngles.z + angularVelocity * Time.deltaTime;

@@ -14,9 +14,9 @@ public class CameraScaling : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
-    {
-        transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);;
-
-    }
+    // void LateUpdate()
+    // {
+    //     transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);;
+    //
+    // }
 }

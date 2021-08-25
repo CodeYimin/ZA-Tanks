@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "ZA Tanks",
     "maps": [
         {
             "name": "Player",
@@ -7,16 +7,16 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "881ece30-8555-4dab-9aa6-a24050363d94",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
+                    "name": "Fire",
                     "type": "Button",
-                    "id": "e3394bd8-5c84-4a2b-ba22-b0bac7c62bda",
+                    "id": "e4fd2642-00c0-4c7f-835f-6ed451b6953b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -40,7 +40,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard Left",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -51,7 +51,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard Left",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -62,7 +62,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard Left",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -73,7 +73,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard Left",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -82,7 +82,7 @@
                     "name": "Arrow Keys",
                     "id": "493c8aeb-32af-4c93-a11f-c3f730324e71",
                     "path": "2DVector",
-                    "interactions": "Press,Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Movement",
@@ -95,7 +95,7 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard Right",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -106,7 +106,7 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard Right",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -117,7 +117,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard Right",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -128,57 +128,30 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard Right",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "73e2e0a2-25a2-4682-b0dd-96bef97021a0",
-                    "path": "<Keyboard>/s",
+                    "id": "bca0d080-940f-45b5-8daf-5c9cda08431e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "Keyboard Left",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "86da882d-c9d6-4420-8655-0c9521bf4052",
-                    "path": "<Keyboard>/a",
+                    "id": "de9f3f4c-5181-420a-a98e-98ea4e355c80",
+                    "path": "<Keyboard>/slash",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "New action map",
-            "id": "41bdd8ae-46b9-47f7-b9a6-235656ac6dae",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "fd8c9462-d7bd-4733-a422-71607edae572",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "75d3d728-8ffd-4327-b90e-add08bd9bc94",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "Keyboard Right",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -187,9 +160,26 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": []
+            "name": "Keyboard Left",
+            "bindingGroup": "Keyboard Left",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard Right",
+            "bindingGroup": "Keyboard Right",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }

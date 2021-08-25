@@ -2,50 +2,73 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] FireMode fireMode;
+    [SerializeField] float cooldownMs;
+    
     public event Action OnFire;
     
-    enum FireMode
+    private enum FireMode
     {
         TapToFire,
         HoldToFire
     }
 
-    [SerializeField] FireMode fireMode;
-    [SerializeField] string fireButton;
-    [SerializeField] float cooldownMs;
+    private float nextFireTime;
+    private bool fireInput;
+    private bool tapToFireLock;
+    private int hi = 1;
 
-    float nextFireTime;
-
-    void Start()
+    public void OnFireInput(InputAction.CallbackContext context)
+    {
+        hi = 2;
+        print(hi);
+        // fireInput = context.ReadValueAsButton();
+        // if (!fireInput)
+        // {
+        //     tapToFireLock = false;
+        // }
+    }
+    
+    private void Start()
     {
         OnFire += AddCooldown;
     }
     
-    void Update()
+    private void Update()
     {
-        if (!OnCooldown())
+        print(hi);
+        if (!IsOnCooldown())
         {
-            Fire();
+            InvokeFireEvent();
         }
     }
     
-    void Fire()
+    private void InvokeFireEvent()
     {
         switch (fireMode)
         {
             case FireMode.TapToFire:
-                // if (Input.GetButtonDown(fireButton)) OnFire?.Invoke();
+                if (fireInput && !tapToFireLock)
+                {
+                    print("fire");
+                    OnFire?.Invoke();
+                    tapToFireLock = true;
+                }
                 break;
             case FireMode.HoldToFire:
-                // if (Input.GetButton(fireButton)) OnFire?.Invoke();
+                if (fireInput)
+                {
+                    OnFire?.Invoke();
+                }
                 break;
         }
     }
 
-    bool OnCooldown()
+    bool IsOnCooldown()
     {
         return nextFireTime > Time.time;
     }
