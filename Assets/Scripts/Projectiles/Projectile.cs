@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
     
-    Rigidbody2D myRigidbody;
-    
-    void Awake()
+    private Rigidbody2D myRigidbody;
+
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myRigidbody.velocity = transform.up * speed;

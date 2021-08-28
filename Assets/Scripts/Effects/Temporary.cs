@@ -5,7 +5,7 @@ using UnityEngine;
 public class Temporary : MonoBehaviour
 {
     public float duration;
-    float durationPassed;
+    private float durationPassed;
     void Update()
     {
         if (durationPassed < duration)
@@ -18,7 +18,7 @@ public class Temporary : MonoBehaviour
         }
     }
     
-    public void setDuration(float newDuration)
+    public void SetDuration(float newDuration)
     {
         duration = newDuration;
     }

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 
 public class WeaponHolder : MonoBehaviour
 {
-    [SerializeField] Weapon startingWeapon;
-    Weapon equippedWeapon;
+    [SerializeField] private Weapon startingWeapon;
+    private Weapon equippedWeapon;
     
-    void Start()
+    private void Start()
     {
         if (startingWeapon != null)
         {
@@ -25,5 +26,5 @@ public class WeaponHolder : MonoBehaviour
         equippedWeapon = Instantiate(weaponToEquip, transform.position, transform.rotation);
         equippedWeapon.transform.parent = transform;
     }
-    
+
 }

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6784843006434386020}
   - component: {fileID: 6784843006434386016}
   - component: {fileID: 6784843006434386011}
-  - component: {fileID: 6784843006434386017}
-  - component: {fileID: 6784843006434386010}
   - component: {fileID: 6784843006434386021}
+  - component: {fileID: 6784843006434386010}
+  - component: {fileID: 2732588921151090462}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -126,36 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d901af0097bea4196ff50b575ad227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6784843006434386017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6784843006434386018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab6fad6c52d33054c8dac6df4ea99401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  backwardsMoveSlowdown: 0.3
-  rotateSpeed: 180
-  collisionTags:
-  - Wall
---- !u!114 &6784843006434386010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6784843006434386018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbccb591b16f2d540a38a8a3af344825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
 --- !u!114 &6784843006434386021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: da4ec26381d7aa9479cca24ea779bf56, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 1
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -183,7 +153,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6784843006434386017}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -218,6 +188,36 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6784843006434386010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784843006434386018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbccb591b16f2d540a38a8a3af344825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+--- !u!114 &2732588921151090462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784843006434386018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9585dfa76bd146d4b7984f3f73e9ba38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  backwardsMoveSlowdown: 0.5
+  rotateSpeed: 180
+  collisionTags:
+  - Wall
 --- !u!1 &6784843007352319594
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,4 +261,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef5e817f519cb24993d78fafdd1527c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: {fileID: 4329710140535231539, guid: 2a9f0f4e3432fce43a39e5af3f8da3ab, type: 3}
+  startingWeapon: {fileID: 7370268219788919216, guid: 2a9f0f4e3432fce43a39e5af3f8da3ab, type: 3}

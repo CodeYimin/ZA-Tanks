@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using UnityEngine;
 
 namespace Utility
 {
@@ -13,6 +15,16 @@ namespace Utility
                     array[i, j] = valueToFill;
                 }
             }
+        }
+
+        public static void PrintArray<T>(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(T item in array)
+            {
+                sb.Append(item + ", ");
+            }
+            Debug.Log(sb);
         }
     }
 }
