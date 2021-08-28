@@ -17,18 +17,18 @@ namespace Map
         [SerializeField] private bool printToConsole;
 
         private PlayerManager _playerManager;
-        private float mazeWorldWidth;
-        private float mazeWorldHeight;
-        private Vector2 mazeWorldOffset;
+        private float _mazeWorldWidth;
+        private float _mazeWorldHeight;
+        private Vector2 _mazeWorldOffset;
 
         private void Awake()
         {
             _playerManager = FindObjectOfType<PlayerManager>();
             
-            mazeWorldWidth = mazeWidth * wallLength;
-            mazeWorldHeight = mazeHeight * wallLength;
+            _mazeWorldWidth = mazeWidth * wallLength;
+            _mazeWorldHeight = mazeHeight * wallLength;
 
-            mazeWorldOffset = new Vector2(mazeWorldWidth * -1 / 2, mazeWorldHeight * -1 / 2);
+            _mazeWorldOffset = new Vector2(_mazeWorldWidth * -1 / 2, _mazeWorldHeight * -1 / 2);
         }
         
         private void OnEnable()
@@ -54,7 +54,7 @@ namespace Map
                 new Vector2(Random.Range(0, mazeWidth), Random.Range(0, mazeHeight));
             
             Vector2 playerPos =
-                new Vector2(playerMazePos.x * wallLength + wallLength / 2, playerMazePos.y * wallLength + wallLength / 2) + mazeWorldOffset;
+                new Vector2(playerMazePos.x * wallLength + wallLength / 2, playerMazePos.y * wallLength + wallLength / 2) + _mazeWorldOffset;
 
             Vector3 playerRotation = Vector3.forward * Random.Range(0, 360);
             
@@ -66,22 +66,22 @@ namespace Map
         {
             //Render Main Walls
             Transform topWall = Instantiate(wallPrefab, transform);
-            topWall.position = new Vector2(mazeWorldWidth / 2, mazeWorldHeight) + mazeWorldOffset;
+            topWall.position = new Vector2(_mazeWorldWidth / 2, _mazeWorldHeight) + _mazeWorldOffset;
             topWall.localScale = new Vector2(mazeWidth * wallLength + wallThickness, wallThickness);
             topWall.eulerAngles = Vector3.zero;
             
             Transform botWall = Instantiate(wallPrefab, transform);
-            botWall.position = new Vector2(mazeWorldWidth / 2, 0) + mazeWorldOffset;
+            botWall.position = new Vector2(_mazeWorldWidth / 2, 0) + _mazeWorldOffset;
             botWall.localScale = new Vector2(mazeWidth * wallLength + wallThickness, wallThickness);
             botWall.eulerAngles = Vector3.zero;
             
             Transform rightWall = Instantiate(wallPrefab, transform);
-            rightWall.position = new Vector2(mazeWorldWidth, mazeWorldHeight / 2) + mazeWorldOffset;
+            rightWall.position = new Vector2(_mazeWorldWidth, _mazeWorldHeight / 2) + _mazeWorldOffset;
             rightWall.localScale = new Vector2(mazeHeight * wallLength + wallThickness, wallThickness);
             rightWall.eulerAngles = Vector3.forward * 90;
             
             Transform leftWall = Instantiate(wallPrefab, transform);
-            leftWall.position = new Vector2(0, mazeWorldHeight / 2) + mazeWorldOffset;
+            leftWall.position = new Vector2(0, _mazeWorldHeight / 2) + _mazeWorldOffset;
             leftWall.localScale = new Vector2(mazeHeight * wallLength + wallThickness, wallThickness);
             leftWall.eulerAngles = Vector3.forward * 90;
             
@@ -96,7 +96,7 @@ namespace Map
                         Vector2 wallPosition = new Vector2(i * wallLength + wallLength / 2, (j + 1) * wallLength);
                         Vector3 wallRotation = Vector3.zero;
                         Transform wall = Instantiate(wallPrefab, transform);
-                        wall.position = wallPosition + mazeWorldOffset;
+                        wall.position = wallPosition + _mazeWorldOffset;
                         wall.localScale = wallSize;
                         wall.eulerAngles = wallRotation;
                     }
@@ -115,7 +115,7 @@ namespace Map
                         Vector2 wallPosition = new Vector2((i + 1) * wallLength, j * wallLength + wallLength / 2);
                         Vector3 wallRotation = Vector3.forward * 90;
                         Transform wall = Instantiate(wallPrefab, transform);
-                        wall.position = wallPosition + mazeWorldOffset;
+                        wall.position = wallPosition + _mazeWorldOffset;
                         wall.localScale = wallSize;
                         wall.eulerAngles = wallRotation;
                     }
