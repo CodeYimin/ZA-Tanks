@@ -12,17 +12,17 @@ namespace Movement
         [SerializeField] private float rotateSpeed = 180;
         [SerializeField] private string[] collisionTags;
 
-        private Vector2 movementInput;
+        private Vector2 _movementInput;
 
         private void OnMovement(InputValue value)
         {
-            movementInput = value.Get<Vector2>();
+            _movementInput = value.Get<Vector2>();
         }
         
         private void Update()
         {
             // Tank forward/backward movement
-            float inputY = movementInput.y;
+            float inputY = _movementInput.y;
             Vector2 direction = transform.up;
             Vector2 moveVelocity = direction * (inputY * moveSpeed);
             // ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -32,7 +32,7 @@ namespace Movement
             }
     
             // Tank rotation
-            float inputX = movementInput.x;
+            float inputX = _movementInput.x;
             float angularVelocity = -inputX * rotateSpeed;
         
             MoveAndRotate(moveVelocity, angularVelocity);

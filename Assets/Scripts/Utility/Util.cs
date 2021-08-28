@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -17,10 +18,10 @@ namespace Utility
             }
         }
 
-        public static void PrintArray<T>(T[] array)
+        public static void PrintIterative<T>(IEnumerable<T> iterative)
         {
             StringBuilder sb = new StringBuilder();
-            foreach(T item in array)
+            foreach(T item in iterative)
             {
                 sb.Append(item + ", ");
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 namespace Map
 {
@@ -14,7 +15,15 @@ namespace Map
         [SerializeField] private float wallThickness;
         [SerializeField] private float wallRemovalPercentage;
         [SerializeField] private bool printToConsole;
+
+        private PlayerManager _playerManager;
         
+        private void OnEnable()
+        {
+            _playerManager = FindObjectOfType<PlayerManager>();
+            _playerManager.OnPlayerSpawn += OnPlayerSpawn;
+        }
+
         private void Start()
         {
             MazeGenerator.Generate(mazeWidth, mazeHeight, out bool[,] horizontalWalls, out bool[,] verticalWalls);
@@ -25,6 +34,12 @@ namespace Map
             {
                 MazeGenerator.PrintToConsole(horizontalWalls, verticalWalls);
             }
+        }
+
+        private void OnPlayerSpawn(GameObject player)
+        {
+            print("boom");
+            player.transform.position = new Vector2(5, 5);
         }
 
         void Draw(bool[,] horizontalWalls, bool[,] verticalWalls)

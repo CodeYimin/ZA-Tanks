@@ -1,23 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace Projectiles
 {
-    [SerializeField] private float speed;
+    public class Projectile : MonoBehaviour
+    {
+        [SerializeField] private float speed;
     
-    private Rigidbody2D myRigidbody;
+        private Rigidbody2D _myRigidbody;
 
-    private void Awake()
-    {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        myRigidbody.velocity = transform.up * speed;
-    }
+        private void Awake()
+        {
+            _myRigidbody = GetComponent<Rigidbody2D>();
+            _myRigidbody.velocity = transform.up * speed;
+        }
 
-    public void SetSpeed(float newSpeed)
-    {
-        myRigidbody.velocity = transform.up * newSpeed;
+        public void SetSpeed(float newSpeed)
+        {
+            _myRigidbody.velocity = transform.up * newSpeed;
+        }
     }
 }

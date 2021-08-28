@@ -1,25 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Temporary : MonoBehaviour
+namespace Effects
 {
-    public float duration;
-    private float durationPassed;
-    void Update()
+    public class Temporary : MonoBehaviour
     {
-        if (durationPassed < duration)
+        [SerializeField] private float duration;
+        private float _durationPassed;
+
+        private void Update()
         {
-            durationPassed += Time.deltaTime;
+            if (_durationPassed < duration)
+            {
+                _durationPassed += Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     
-    public void SetDuration(float newDuration)
-    {
-        duration = newDuration;
+        public void SetDuration(float newDuration)
+        {
+            duration = newDuration;
+        }
     }
 }

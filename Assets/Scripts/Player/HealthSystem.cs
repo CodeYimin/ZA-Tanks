@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
     public event Action<float> OnHealthDamage;
     public event Action<float> OnHealthChange;
     
-    [SerializeField] float health = 1;
+    [SerializeField] private float health = 1;
     
     public void TakeDamage(float damage)
     {

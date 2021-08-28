@@ -1,4 +1,6 @@
 ﻿using System;
+using Effects;
+using Projectiles;
 using UnityEngine;
 
 namespace Weapons
@@ -10,7 +12,7 @@ namespace Weapons
         [SerializeField] private float projectileSpeed = 5;
         [SerializeField] private float projectileDuration = 5;
 
-        void OnFire()
+        private void OnFire()
         {            
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation);
             newProjectile.SetSpeed(projectileSpeed);

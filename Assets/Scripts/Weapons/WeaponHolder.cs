@@ -1,30 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Weapons;
 
-public class WeaponHolder : MonoBehaviour
+namespace Weapons
 {
-    [SerializeField] private Weapon startingWeapon;
-    private Weapon equippedWeapon;
+    public class WeaponHolder : MonoBehaviour
+    {
+        [SerializeField] private Weapon startingWeapon;
+        private Weapon _equippedWeapon;
     
-    private void Start()
-    {
-        if (startingWeapon != null)
+        private void Start()
         {
-            EquipWeapon(startingWeapon);
-        }
-    }
-
-    public void EquipWeapon(Weapon weaponToEquip)
-    {
-        if (equippedWeapon != null)
-        {
-            Destroy(equippedWeapon.gameObject);
+            if (startingWeapon != null)
+            {
+                EquipWeapon(startingWeapon);
+            }
         }
 
-        equippedWeapon = Instantiate(weaponToEquip, transform.position, transform.rotation);
-        equippedWeapon.transform.parent = transform;
-    }
+        public void EquipWeapon(Weapon weaponToEquip)
+        {
+            if (_equippedWeapon != null)
+            {
+                Destroy(_equippedWeapon.gameObject);
+            }
 
+            _equippedWeapon = Instantiate(weaponToEquip, transform.position, transform.rotation);
+            _equippedWeapon.transform.parent = transform;
+        }
+
+    }
 }

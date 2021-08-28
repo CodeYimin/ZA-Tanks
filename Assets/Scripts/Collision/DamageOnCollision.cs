@@ -1,29 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DamageOnCollision : MonoBehaviour
+namespace Collision
 {
-    enum Collider
+    public class DamageOnCollision : MonoBehaviour
     {
-        Self,
-        Other,
-        Both
-    }
-
-    [SerializeField] string[] collisionTags;
-    [SerializeField] float damage = 1;
-    [SerializeField] Collider affectedCollider;
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        HealthSystem myHealthSystem = collision.otherCollider.GetComponent<HealthSystem>();
-        HealthSystem otherHealthSystem = collision.collider.GetComponent<HealthSystem>();
-
-        if (collisionTags.Contains(collision.collider.tag))
+        private enum Collider
         {
+            Self,
+            Other,
+            Both
+        }
+
+        [SerializeField] private string[] collisionTags;
+        [SerializeField] private float damage = 1;
+        [SerializeField] private Collider affectedCollider;
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            HealthSystem myHealthSystem = collision.otherCollider.GetComponent<HealthSystem>();
+            HealthSystem otherHealthSystem = collision.collider.GetComponent<HealthSystem>();
+
+            if (!collisionTags.Contains(collision.collider.tag)) return;
+        
             switch (affectedCollider)
             {
                 case Collider.Self:
@@ -45,6 +45,8 @@ public class DamageOnCollision : MonoBehaviour
                         otherHealthSystem.TakeDamage(damage);
                     }
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

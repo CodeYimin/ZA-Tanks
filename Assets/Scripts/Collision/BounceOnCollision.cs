@@ -6,25 +6,25 @@ namespace Collision
 {
     public class BounceOnCollision : MonoBehaviour
     {
-        [SerializeField] string[] collisionTags;
-        Rigidbody2D myRigidbody;
+        [SerializeField] private string[] collisionTags;
+        private Rigidbody2D _myRigidbody;
 
-        float lastCollisionTime;
-        
-        void Start()
+        private float _lastCollisionTime;
+
+        private void Start()
         {
-            myRigidbody = GetComponent<Rigidbody2D>();
+            _myRigidbody = GetComponent<Rigidbody2D>();
         }
-        
-        void OnCollisionEnter2D(Collision2D collision)
-            {
-                if (Time.time != lastCollisionTime && collisionTags.Contains(collision.collider.tag))
-                {
-                    lastCollisionTime = Time.time;
-                    ContactPoint2D hit = collision.GetContact(0);
-                    myRigidbody.velocity = Vector2.Reflect(myRigidbody.velocity, hit.normal); 
-                }
-        
-            }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (Time.time == _lastCollisionTime || !collisionTags.Contains(collision.collider.tag)) return;
+            
+            _lastCollisionTime = Time.time;
+            ContactPoint2D hit = collision.GetContact(0);
+            _myRigidbody.velocity = Vector2.Reflect(_myRigidbody.velocity, hit.normal);
+            
+        }
     }
 }

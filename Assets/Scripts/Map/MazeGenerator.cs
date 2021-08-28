@@ -6,10 +6,10 @@ using Utility;
 
 namespace Map
 {
-    internal struct Position
+    internal readonly struct Position
     {
-        public int X;
-        public int Y;
+        public readonly int X;
+        public readonly int Y;
 
         public Position(int x, int y)
         {

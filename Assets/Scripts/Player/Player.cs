@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    HealthSystem myHealthSystem;
+    HealthSystem _myHealthSystem;
     
     void Start()
     {
-        myHealthSystem = GetComponent<HealthSystem>();
-        myHealthSystem.OnHealthChange += OnHealthChange;
+        _myHealthSystem = GetComponent<HealthSystem>();
+        _myHealthSystem.OnHealthChange += OnHealthChange;
     }
 
     void OnHealthChange(float newHealth)

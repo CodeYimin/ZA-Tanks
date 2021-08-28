@@ -1,25 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DestroyOnCollision : MonoBehaviour
+namespace Collision
 {
-    enum Collider
+    public class DestroyOnCollision : MonoBehaviour
     {
-        Self,
-        Other,
-        Both
-    }
-
-    [SerializeField] string[] collisionTags;
-    [SerializeField] Collider affectedCollider;
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collisionTags.Contains(collision.collider.tag))
+        private enum Collider
         {
+            Self,
+            Other,
+            Both
+        }
+
+        [SerializeField] private string[] collisionTags;
+        [SerializeField] private Collider affectedCollider;
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (!collisionTags.Contains(collision.collider.tag)) return;
+        
             switch (affectedCollider)
             {
                 case Collider.Self:
@@ -32,8 +32,10 @@ public class DestroyOnCollision : MonoBehaviour
                     Destroy(collision.otherCollider.gameObject);
                     Destroy(collision.collider.gameObject);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-    }
 
+    }
 }
