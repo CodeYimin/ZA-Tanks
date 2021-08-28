@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = System.Random;
 
 namespace Map
 {
@@ -38,8 +37,9 @@ namespace Map
 
         private void OnPlayerSpawn(GameObject player)
         {
-            print("boom");
-            player.transform.position = new Vector2(5, 5);
+            int playerX = UnityEngine.Random.Range(0, mazeWidth);
+            int playerY = UnityEngine.Random.Range(0, mazeHeight);
+            player.transform.position = new Vector2((playerX - (mazeWidth)/2.0f)*wallLength + wallLength/2.0f, (-playerY + (mazeHeight)/2.0f)*wallLength - wallLength/2.0f);
         }
 
         void Draw(bool[,] horizontalWalls, bool[,] verticalWalls)
