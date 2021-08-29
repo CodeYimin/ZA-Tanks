@@ -8,8 +8,9 @@ namespace Collision
     {
         [SerializeField] private string[] collisionTags;
         private Rigidbody2D _myRigidbody;
-
-        private float _lastCollisionTime;
+        
+        private Vector2 _previousContactPoint;
+        private float _previousContactTime;
 
         private void Start()
         {
@@ -18,13 +19,15 @@ namespace Collision
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (Time.time == _lastCollisionTime || !collisionTags.Contains(collision.collider.tag)) return;
+            ContactPoint2D contact = collision.GetContact(0);
             
-            _lastCollisionTime = Time.time;
-            ContactPoint2D hit = collision.GetContact(0);
-            _myRigidbody.velocity = Vector2.Reflect(_myRigidbody.velocity, hit.normal);
-            
+            if (!collisionTags.Contains(collision.collider.tag)) return;
+            if (Time.time == _previousContactTime && contact.point == _previousContactPoint) return;
+
+            _previousContactTime = Time.time;
+            _previousContactPoint = contact.point;
+
+            _myRigidbody.velocity = Vector2.Reflect(_myRigidbody.velocity, contact.normal);
         }
     }
 }
