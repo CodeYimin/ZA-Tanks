@@ -7,16 +7,18 @@ namespace Map
 {
     public class MazeRenderer : MonoBehaviour
     {
-
-        [SerializeField] private int mazeHeight;
-        [SerializeField] private int mazeWidth;
+        [SerializeField] private Vector2Int minMazeSize = Vector2Int.one * 5;
+        [SerializeField] private Vector2Int maxMazeSize = Vector2Int.one * 10;
+        
         [SerializeField] private Transform wallPrefab;
         [SerializeField] private float wallLength;
         [SerializeField] private float wallThickness;
         [SerializeField] private float wallRemovalPercentage;
+        
         [SerializeField] private bool printToConsole;
 
         private PlayerManager _playerManager;
+        private Vector2Int _mazeSize;
         private float _mazeWorldWidth;
         private float _mazeWorldHeight;
         private Vector2 _mazeWorldOffset;
@@ -24,9 +26,11 @@ namespace Map
         private void Awake()
         {
             _playerManager = FindObjectOfType<PlayerManager>();
+
+            _mazeSize = new Vector2Int(Random.Range(minMazeSize.x, maxMazeSize.x), Random.Range(minMazeSize.y, maxMazeSize.y));
             
-            _mazeWorldWidth = mazeWidth * wallLength;
-            _mazeWorldHeight = mazeHeight * wallLength;
+            _mazeWorldWidth = _mazeSize.x * wallLength;
+            _mazeWorldHeight = _mazeSize.y * wallLength;
 
             _mazeWorldOffset = new Vector2(_mazeWorldWidth * -1 / 2, _mazeWorldHeight * -1 / 2);
         }
@@ -38,7 +42,7 @@ namespace Map
 
         private void Start()
         {
-            MazeGenerator.Generate(mazeWidth, mazeHeight, out bool[,] horizontalWalls, out bool[,] verticalWalls);
+            MazeGenerator.Generate(_mazeSize.x, _mazeSize.y, out bool[,] horizontalWalls, out bool[,] verticalWalls);
             MazeGenerator.RandomlyRemoveWalls(horizontalWalls, verticalWalls, wallRemovalPercentage);
             Draw(horizontalWalls, verticalWalls);
             
@@ -51,7 +55,7 @@ namespace Map
         private void OnPlayerSpawn(GameObject player)
         {
             Vector2 playerMazePos =
-                new Vector2(Random.Range(0, mazeWidth), Random.Range(0, mazeHeight));
+                new Vector2(Random.Range(0, _mazeSize.x), Random.Range(0, _mazeSize.y));
             
             Vector2 playerPos =
                 new Vector2(playerMazePos.x * wallLength + wallLength / 2, playerMazePos.y * wallLength + wallLength / 2) + _mazeWorldOffset;
@@ -67,22 +71,22 @@ namespace Map
             //Render Main Walls
             Transform topWall = Instantiate(wallPrefab, transform);
             topWall.position = new Vector2(_mazeWorldWidth / 2, _mazeWorldHeight) + _mazeWorldOffset;
-            topWall.localScale = new Vector2(mazeWidth * wallLength + wallThickness, wallThickness);
+            topWall.localScale = new Vector2(_mazeSize.x * wallLength + wallThickness, wallThickness);
             topWall.eulerAngles = Vector3.zero;
             
             Transform botWall = Instantiate(wallPrefab, transform);
             botWall.position = new Vector2(_mazeWorldWidth / 2, 0) + _mazeWorldOffset;
-            botWall.localScale = new Vector2(mazeWidth * wallLength + wallThickness, wallThickness);
+            botWall.localScale = new Vector2(_mazeSize.x * wallLength + wallThickness, wallThickness);
             botWall.eulerAngles = Vector3.zero;
             
             Transform rightWall = Instantiate(wallPrefab, transform);
             rightWall.position = new Vector2(_mazeWorldWidth, _mazeWorldHeight / 2) + _mazeWorldOffset;
-            rightWall.localScale = new Vector2(mazeHeight * wallLength + wallThickness, wallThickness);
+            rightWall.localScale = new Vector2(_mazeSize.y * wallLength + wallThickness, wallThickness);
             rightWall.eulerAngles = Vector3.forward * 90;
             
             Transform leftWall = Instantiate(wallPrefab, transform);
             leftWall.position = new Vector2(0, _mazeWorldHeight / 2) + _mazeWorldOffset;
-            leftWall.localScale = new Vector2(mazeHeight * wallLength + wallThickness, wallThickness);
+            leftWall.localScale = new Vector2(_mazeSize.y * wallLength + wallThickness, wallThickness);
             leftWall.eulerAngles = Vector3.forward * 90;
             
             // Render horizontal walls

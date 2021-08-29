@@ -10,8 +10,12 @@ public class PlayerManager : MonoBehaviour
 
     public event Action<GameObject> OnPlayerSpawn;
 
-    // Start is called before the first frame update
-    private void Start()
+    private void Awake()
+    {
+        SpawnPlayers();
+    }
+
+    public void SpawnPlayers()
     {
         PlayerInput player1 = PlayerInput.Instantiate(playerPrefab, 0, "Keyboard Left", -1, Keyboard.current);
         OnPlayerSpawn?.Invoke(player1.gameObject);
