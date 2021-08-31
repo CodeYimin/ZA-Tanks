@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9585dfa76bd146d4b7984f3f73e9ba38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 8
   backwardsMoveSlowdown: 0.8
-  rotateSpeed: 360
+  rotateSpeed: 180
   collisionTags:
   - Wall
 --- !u!1 &6784843007352319594
@@ -261,4 +261,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef5e817f519cb24993d78fafdd1527c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: {fileID: 7370268219788919216, guid: 2a9f0f4e3432fce43a39e5af3f8da3ab, type: 3}
+  startingWeapon: {fileID: 7370268219788919216, guid: 8b54447b1adea3541b70473e19102d5a, type: 3}

@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 6201541829331282227}
   - component: {fileID: 3975882807492580800}
   - component: {fileID: 3326322740047811350}
-  - component: {fileID: 1360289537207104677}
+  - component: {fileID: -7648539596558242521}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Small Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 4116033405930020111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   - Player
   damage: 1
   affectedCollider: 1
---- !u!114 &1360289537207104677
+--- !u!114 &-7648539596558242521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

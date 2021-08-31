@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 3975882807492580800}
   - component: {fileID: 3326322740047811350}
   - component: {fileID: 1360289537207104677}
+  - component: {fileID: 1969089651760643153}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Big Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 4116033405930020111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -183,3 +184,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTags:
   - Wall
+--- !u!114 &1969089651760643153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4116033405930020111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209da188d5aba3146abe019ce3c5de55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrapnelThroughWall: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
+  shrapnelStopAtWall: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
+  projectileSpeed: 7
+  projectileDuration: 8
+  numberOfProjectiles: 30
+  wallCollision: 1
