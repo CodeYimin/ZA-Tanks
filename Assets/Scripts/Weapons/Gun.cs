@@ -16,6 +16,7 @@ namespace Weapons
         {            
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation);
             newProjectile.SetSpeed(projectileSpeed);
+            newProjectile.transform.Translate(Vector3.up * newProjectile.transform.localScale.y / 2, Space.Self);
             
             Temporary projectileLifetime = newProjectile.gameObject.AddComponent<Temporary>();
             projectileLifetime.SetDuration(projectileDuration);

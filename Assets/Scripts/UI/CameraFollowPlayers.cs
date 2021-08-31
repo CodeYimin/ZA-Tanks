@@ -17,11 +17,17 @@ namespace UI
         {
             _playerManager = FindObjectOfType<PlayerManager>();
             _playerManager.OnPlayerSpawn += OnPlayerSpawn;
+            _playerManager.OnPlayerDestroy += OnPlayerDestroy;
         }
 
         private void OnPlayerSpawn(GameObject player)
         {
             _players.Add(player);
+        }
+
+        private void OnPlayerDestroy(GameObject player)
+        {
+            _players.Remove(player);
         }
         
         private void LateUpdate()

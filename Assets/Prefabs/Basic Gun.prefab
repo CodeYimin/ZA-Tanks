@@ -287,4 +287,4 @@ MonoBehaviour:
   projectile: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
   muzzle: {fileID: 8506557951330540097}
   projectileSpeed: 8
-  projectileDuration: 15
+  projectileDuration: 1

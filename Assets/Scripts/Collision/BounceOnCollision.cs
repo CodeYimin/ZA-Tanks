@@ -23,7 +23,7 @@ namespace Collision
             
             if (!collisionTags.Contains(collision.collider.tag)) return;
             if (Time.time == _previousContactTime && contact.point == _previousContactPoint) return;
-
+            
             _previousContactTime = Time.time;
             _previousContactPoint = contact.point;
 

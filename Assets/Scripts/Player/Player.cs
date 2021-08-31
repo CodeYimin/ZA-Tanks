@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    HealthSystem _myHealthSystem;
+    private HealthSystem _myHealthSystem;
+    private PlayerManager _playerManager;
     
-    void Start()
+    private void Awake()
     {
         _myHealthSystem = GetComponent<HealthSystem>();
+        _playerManager = FindObjectOfType<PlayerManager>();
+    }
+
+    private void Start()
+    {
         _myHealthSystem.OnHealthChange += OnHealthChange;
     }
 
-    void OnHealthChange(float newHealth)
+    private void OnHealthChange(float newHealth)
     {
         if (newHealth <= 0)
         {
-            Destroy(gameObject);
+            _playerManager.DestroyPlayer(gameObject);
         }
     }
 }
