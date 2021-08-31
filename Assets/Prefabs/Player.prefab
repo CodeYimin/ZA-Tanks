@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   backwardsMoveSlowdown: 0.8
-  rotateSpeed: 360
+  rotateSpeed: 180
   collisionTags:
   - Wall
 --- !u!1 &6784843007352319594
