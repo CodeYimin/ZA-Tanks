@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9585dfa76bd146d4b7984f3f73e9ba38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 7
   backwardsMoveSlowdown: 0.8
   rotateSpeed: 180
   collisionTags:
@@ -261,4 +261,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef5e817f519cb24993d78fafdd1527c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: {fileID: 7370268219788919216, guid: 8b54447b1adea3541b70473e19102d5a, type: 3}
+  startingWeapon: {fileID: 7370268219788919216, guid: 94286d7cda3b90540b47aeb0d5670b0f, type: 3}

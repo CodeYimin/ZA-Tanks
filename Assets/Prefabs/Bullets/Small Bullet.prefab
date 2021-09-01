@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6201541829331282227}
   - component: {fileID: 3975882807492580800}
   - component: {fileID: 3326322740047811350}
-  - component: {fileID: 7157497953705089603}
+  - component: {fileID: 1360289537207104677}
   m_Layer: 0
   m_Name: Small Bullet
   m_TagString: Bullet
@@ -168,7 +168,7 @@ MonoBehaviour:
   - Player
   damage: 1
   affectedCollider: 1
---- !u!114 &7157497953705089603
+--- !u!114 &1360289537207104677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,9 +177,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4116033405930020111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f019d06b3e1c8247b82ba5c0a34fa43, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee2c9ab5884412282a19da20bd9ad40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedChangePercentage: 0.2
   collisionTags:
   - Wall
