@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73600f3586e2bb648acc6add841b49d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &3975882807492580800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209da188d5aba3146abe019ce3c5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrapnelThroughWall: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
-  shrapnelStopAtWall: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
+  shrapnels:
+  - {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
   projectileSpeed: 7
   projectileDuration: 8
   numberOfProjectiles: 30
