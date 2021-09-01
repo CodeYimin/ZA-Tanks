@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1872477147284279321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.612, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.9518896, z: 1}
+  m_LocalScale: {x: 0.6435, y: 0.63062686, z: 1}
   m_Children: []
   m_Father: {fileID: 933584392213888274}
   m_RootOrder: 1
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 7370268219788919216}
   - component: {fileID: 3535003766851952322}
   m_Layer: 0
-  m_Name: Basic Gun
+  m_Name: Big Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ea18a9335f4284b5c8d3b99fa00174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 6201541829331282227, guid: d39c8a8a41f6040479b29db1ca665dc1, type: 3}
+  projectile: {fileID: 6201541829331282227, guid: f058c39e73218694b8eb436d9b716957, type: 3}
   muzzle: {fileID: 8506557951330540097}
-  projectileSpeed: 8
+  projectileSpeed: 6
   projectileDuration: 8
