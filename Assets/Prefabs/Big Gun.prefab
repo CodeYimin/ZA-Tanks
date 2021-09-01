@@ -288,4 +288,4 @@ MonoBehaviour:
   muzzle: {fileID: 8506557951330540097}
   projectileSpeed: 6
   projectileDuration: 8
-  projectileScale: 0.4
+  projectileScale: 0.8
