@@ -30,19 +30,19 @@ namespace UI
             _players.Remove(player);
         }
         
-        // private void LateUpdate()
-        // {
-        //     if (_players.Count <= 0) return;
-        //     
-        //     float xMin = _players.Min((player) => player.transform.position.x);
-        //     float xMax = _players.Max((player) => player.transform.position.x);
-        //     
-        //     float yMin = _players.Min((player) => player.transform.position.y);
-        //     float yMax = _players.Max((player) => player.transform.position.y);
-        //
-        //     camera.orthographicSize = Math.Max((xMax - xMin) / camera.aspect, yMax - yMin) / 2 + padding;
-        //     camera.transform.position = new Vector3((xMin + xMax) / 2, (yMin + yMax) / 2, -10);
-        //
-        // }
+        private void LateUpdate()
+        {
+            if (_players.Count <= 0) return;
+            
+            float xMin = _players.Min((player) => player.transform.position.x);
+            float xMax = _players.Max((player) => player.transform.position.x);
+            
+            float yMin = _players.Min((player) => player.transform.position.y);
+            float yMax = _players.Max((player) => player.transform.position.y);
+        
+            camera.orthographicSize = Math.Max((xMax - xMin) / camera.aspect, yMax - yMin) / 2 + padding;
+            camera.transform.position = new Vector3((xMin + xMax) / 2, (yMin + yMax) / 2, -10);
+        
+        }
     }
 }
